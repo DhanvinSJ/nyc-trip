@@ -106,7 +106,7 @@ table{font-size:13px}th,td{padding:7px 5px}
   <svg id="scene" viewBox="0 0 1200 520" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
   <div class="wrap txt">
     <h1>New York + Niagara Falls</h1>
-    <p>Our family trip, Dec 23–29, 2026. 3 adults + 1 teen. Everything we're doing, day by day.</p>
+    <p>Our family trip, Dec 23–30, 2026. 3 adults + 1 teen. Everything we're doing, day by day.</p>
     <div class="count" id="count"></div>
   </div>
 </header>
@@ -181,7 +181,7 @@ const facts=[
  ["New York hotel","Renaissance Flushing","Dec 23–28 · 5 nights"],
  ["Niagara hotel","Fairfield Inn & Suites","Dec 28–29 · 1 night"],
  ["Rental car","Avis LaGuardia","Dec 28, 4 AM → Dec 29, 3 PM"],
- ["Fly home","Tue Dec 29, 5:30 PM","LaGuardia (LGA)"]
+ ["Fly out","Tue Dec 29, 5:30 PM","LGA → Detroit, night with family, home Dec 30"]
 ];
 const days=[
  {id:"dec23",d:"23",w:"Wed",title:"Arrival",sub:"Land late, straight to the hotel.",stops:[
@@ -219,14 +219,16 @@ const days=[
   ["3:30 PM","Aquarium of Niagara (optional)","Indoors, about 1 hour. Check closing time first.","tix"],
   ["5:00 PM","Hotel check-in","Rest and change. Ask about grab-and-go breakfast for a 5 AM departure.","go"],
   ["8:00 PM","Falls lighting + fireworks","Falls lit in color every night; fireworks nightly over the holidays, weather permitting. Best free spot: Prospect Point. Then dinner, fill the tank, bed by 9:30.","free"]]},
- {id:"dec29",d:"29",w:"Tue",title:"Drive back + fly home",sub:"Car back by 3 PM at the latest.",stops:[
+ {id:"dec29",d:"29",w:"Tue",title:"Drive back + fly to Detroit",sub:"Car back by 3 PM at the latest.",stops:[
   ["4:30 AM","Leave Niagara Falls","Check 511ny.org for snow. Breakfast stop around 7:30 AM. Swap drivers every 2 hours.","drive"],
   ["~12:30 PM","Return the car at Avis LaGuardia","Fill the tank near the airport first. Aim for 12:30–1:30 PM; the booking ends at 3:00 PM. Then the Avis shuttle to the terminal.","drive"],
-  ["5:30 PM","Flight home","LaGuardia → Detroit → Houston.","go"]],
-  note:"Check the Detroit → Houston connection: flight #1957 leaves Detroit at 2:55 PM but we land in Detroit at 7:33 PM, so it's probably Dec 30 (a night in Detroit) or a booking error. Confirm with the airline."}
+  ["5:30 PM","Fly LaGuardia → Detroit","Land in Detroit at 7:33 PM.","go"],
+  ["Evening","Overnight with family in Michigan","Staying the night at our relatives' place.","go"]]},
+ {id:"dec30",d:"30",w:"Wed",title:"Fly home to Houston",sub:"Detroit → Houston.",stops:[
+  ["2:55 PM","Flight #1957 Detroit → Houston","Head home.","go"]]}
 ];
 const bookings=[
- ["Flights","Houston → Orlando → LaGuardia; LaGuardia → Detroit → Houston","Dec 23 / Dec 29","Booked"],
+ ["Flights","Houston → Orlando → LaGuardia; LaGuardia → Detroit (Dec 29), night with family, Detroit → Houston (Dec 30)","Dec 23 / Dec 29–30","Booked"],
  ["New York hotel","Renaissance New York Flushing Hotel at Tangram, 133-36 37th Ave, Flushing, NY 11354. 2 double beds. Non-refundable.","Dec 23 → Dec 28","~$1,390"],
  ["Niagara hotel","Fairfield by Marriott Inn & Suites Niagara Falls, 643 Rainbow Blvd, Niagara Falls, NY 14303. 2 queen beds. Free breakfast 6:30–9 AM.","Dec 28 → Dec 29","$110.82 + $10 parking"],
  ["Rental car","Avis LaGuardia, 25 Bowery Bay Blvd. Intermediate SUV (Mazda CX-50 or similar), unlimited miles, extra driver, roadside assistance.","Dec 28 4 AM → Dec 29 3 PM","$286.61"],
@@ -249,7 +251,6 @@ const calls=[
  "Renaissance: does the LaGuardia shuttle run around midnight on Dec 23? Where does it pick up?",
  "Fairfield: can we park and leave bags from ~11:30 AM on Dec 28? Express checkout at 4:30 AM?",
  "Avis: does our own car insurance or credit card cover rentals? Tolls are billed to the card afterward.",
- "Airline: confirm the Detroit → Houston date.",
  "CityPASS app: reserve Statue (Dec 24 first ferry), 9/11 (Dec 24 ~2 PM), Top of the Rock (Dec 24 evening), Empire State (Dec 25 night), Harbor Lights (Dec 27, 7 PM)."
 ];
 const tips=[
@@ -281,7 +282,7 @@ document.getElementById("calls").innerHTML=calls.map(c=>`<li>${c}</li>`).join(""
 document.getElementById("tiplist").innerHTML=tips.map(t=>`<li>${t}</li>`).join("");
 
 const cnt=document.getElementById("count");
-const start=new Date(2026,11,23),end=new Date(2026,11,30),now=new Date();
+const start=new Date(2026,11,23),end=new Date(2026,11,31),now=new Date();
 const dleft=Math.ceil((start-now)/864e5);
 cnt.innerHTML=now<start?`<b>${dleft}</b> days to go`:now<end?`<b>We're on the trip!</b>`:`<b>Trip done</b> hope it was great`;
 
