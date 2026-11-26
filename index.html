@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NYC + Niagara Trip</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE everyday family trip guide, warm and festive but practical
+   IDEA a winter subway-and-road timetable: the 7 train line and the I-90 drive as one route
+   PICTURE night skyline of Manhattan with the Rockefeller tree, a road running off to a lit Niagara Falls, falling snow
+   COLOUR snow white ground, holiday red lead, 7-train purple support, pine for the tree; night sky band
+   TYPE Big Shoulders Display (subway signage feel) + Figtree
+   LAYOUT hero band with title in the sky, day chips, then each day as a timetable with hanging times; bookings, costs, checklist below; phone stacks */
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#0f1016);--ink:light-dark(#16141c,#ecebf2);--soft:light-dark(#5d5a68,#a9a6b8);--line:light-dark(#e6e3ec,#262633);--card:light-dark(#f7f5fa,#171822);--red:light-dark(#c8102e,#ff5a6e);--purple:light-dark(#8f2a8b,#d77ad3);--pine:light-dark(#1d6b47,#5fcf98);--blue:light-dark(#1f5fbf,#7fb0ff);--warn:light-dark(#fff3d6,#2b2414);--warnink:light-dark(#6b4a00,#f3d48a)}
+:root[data-theme=light]{color-scheme:light}
+:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Figtree,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:"Big Shoulders Display",Impact,sans-serif;line-height:1.05;letter-spacing:-.01em;margin:0;text-wrap:balance}
+a{color:var(--blue)}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(5vw,16px);padding-right:max(5vw,16px)}
+.band{padding-block:clamp(28px,4vw,56px)}
+.hero{position:relative;background:#121534;color:#fff;overflow:hidden;min-height:clamp(380px,48vw,520px)}
+.hero svg{position:absolute;inset:0;width:100%;height:100%}
+.hero .txt{position:relative;z-index:2;padding-top:clamp(28px,5vw,60px)}
+.hero h1{font-size:clamp(44px,7vw,84px);font-weight:900;max-width:11ch}
+.hero p{margin:12px 0 0;font-size:17px;color:#dcdcf3;max-width:34ch}
+.count{display:inline-flex;align-items:baseline;gap:8px;margin-top:18px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:6px 16px;font-weight:600}
+.count b{font-family:"Big Shoulders Display",sans-serif;font-size:26px}
+.flake{animation:fall linear infinite}
+@keyframes fall{from{transform:translateY(-40px)}to{transform:translateY(560px)}}
+@media(prefers-reduced-motion:reduce){.flake{animation:none}html{scroll-behavior:auto}}
+.nav{position:relative;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;gap:8px;overflow-x:auto;padding-block:10px}
+.nav a{flex:none;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-weight:600;font-size:14px;min-height:40px;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.nav a:hover,.nav a:focus-visible{border-color:var(--red);color:var(--red);outline:none}
+.nav a span{color:var(--soft);font-weight:500}
+@media(min-width:900px){.nav{position:sticky;top:0}}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:12px}
+.fact{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.fact small{display:block;color:var(--soft);font-size:13px}
+.fact strong{display:block;font-size:17px;margin-top:2px}
+.fact em{font-style:normal;color:var(--soft);font-size:14px}
+.day{border-top:4px solid var(--ink);padding-top:22px;margin-top:40px}
+.dayhead{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 20px;align-items:end;margin-bottom:18px}
+.date{font-family:"Big Shoulders Display",sans-serif;font-weight:900;font-size:clamp(46px,6vw,68px);line-height:.9;color:var(--red)}
+.date small{display:block;font-size:17px;color:var(--soft);font-weight:700;letter-spacing:.02em}
+.dayhead h2{font-size:clamp(28px,3.4vw,40px)}
+.dayhead p{margin:4px 0 0;color:var(--soft)}
+.stops{list-style:none;margin:0;padding:0;position:relative}
+.stop{display:grid;grid-template-columns:7.2em 22px minmax(0,1fr);gap:0 14px;position:relative;padding-bottom:18px}
+.stop .t{font-family:"Big Shoulders Display",sans-serif;font-weight:800;font-size:22px;text-align:right;white-space:nowrap;line-height:1.15}
+.stop .dot{position:relative}
+.stop .dot::before{content:"";position:absolute;left:50%;top:4px;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:var(--bg);border:4px solid var(--c,var(--purple));z-index:1}
+.stop .dot::after{content:"";position:absolute;left:50%;top:10px;bottom:-24px;width:4px;margin-left:-2px;background:var(--c,var(--purple));opacity:.35}
+.stop:last-child .dot::after{display:none}
+.stop h3{font-family:Figtree,sans-serif;font-size:18px;font-weight:700;letter-spacing:0;line-height:1.3}
+.stop p{margin:4px 0 0;color:var(--soft);max-width:68ch}
+.tag{display:inline-block;font-size:12.5px;font-weight:700;border-radius:6px;padding:1px 8px;margin-left:6px;vertical-align:2px;white-space:nowrap;color:#fff;background:var(--c,var(--purple))}
+.c-pass{--c:var(--red)}.c-tix{--c:var(--purple)}.c-free{--c:var(--pine)}.c-drive{--c:var(--blue)}.c-go{--c:var(--soft)}
+.legend{display:flex;flex-wrap:wrap;gap:10px 18px;margin-top:14px;font-size:14px;color:var(--soft)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:50%;background:var(--c)}
+.note{background:var(--warn);color:var(--warnink);border-radius:12px;padding:12px 16px;margin-top:8px;max-width:76ch}
+.sec{border-top:4px solid var(--ink);margin-top:56px;padding-top:22px}
+.sec>h2{font-size:clamp(30px,3.6vw,42px);margin-bottom:14px}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:13px;color:var(--soft);font-weight:600}
+td.n,th.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+tr.total td{font-weight:700;border-bottom:0;border-top:2px solid var(--ink)}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 40px}
+.check{list-style:none;margin:0;padding:0}
+.check li{display:flex;gap:12px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line)}
+.check li::before{content:"";flex:none;width:22px;height:22px;border-radius:6px;border:2px solid var(--soft);margin-top:1px}
+.check li.done::before{background:var(--pine);border-color:var(--pine);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10.5l3.2 3L15 7' fill='none' stroke='white' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.check li.done{color:var(--soft)}
+.plain{margin:0;padding-left:20px}
+.plain li{margin-bottom:8px}
+.bars{display:grid;gap:10px;margin-top:6px}
+.bar{display:grid;grid-template-columns:minmax(0,11em) minmax(0,1fr) auto;gap:12px;align-items:center;font-size:15px}
+.bar .track{height:26px;background:var(--card);border-radius:6px;overflow:hidden}
+.bar .fill{height:100%;background:var(--c);border-radius:6px}
+.bar b{white-space:nowrap;font-variant-numeric:tabular-nums}
+footer{margin-top:64px;background:#121534;color:#cfd0ea;font-size:14px}
+footer a{color:#fff}
+@media(max-width:760px){.two{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){
+.stop{grid-template-columns:4.6em 18px minmax(0,1fr);gap:0 10px}
+.stop .t{font-size:18px;white-space:normal}
+.dayhead{grid-template-columns:minmax(0,1fr)}
+table{font-size:13px}th,td{padding:7px 5px}
+.stack thead{display:none}.stack tr{display:grid;padding-block:10px;border-bottom:1px solid var(--line)}.stack td{display:flex;justify-content:space-between;gap:12px;border:0;padding:3px 0;text-align:right}.stack td::before{content:attr(data-l);color:var(--soft);text-align:left;flex:none;max-width:40%}
+.bar{grid-template-columns:minmax(0,1fr) auto}.bar .track{grid-column:1/-1;grid-row:2}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <svg id="scene" viewBox="0 0 1200 520" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
+  <div class="wrap txt">
+    <h1>New York + Niagara Falls</h1>
+    <p>Our family trip, Dec 23–29, 2026. 3 adults + 1 teen. Everything we're doing, day by day.</p>
+    <div class="count" id="count"></div>
+  </div>
+</header>
+
+<nav class="nav" aria-label="Days"><div class="wrap" id="nav"></div></nav>
+
+<main class="wrap">
+  <section class="band" style="padding-bottom:0">
+    <div class="facts" id="facts"></div>
+    <div class="legend">
+      <span class="c-pass"><i></i>CityPASS</span>
+      <span class="c-tix"><i></i>Separate ticket</span>
+      <span class="c-free"><i></i>Free</span>
+      <span class="c-drive"><i></i>Travel / drive</span>
+    </div>
+  </section>
+
+  <div id="days"></div>
+
+  <section class="sec" id="bookings">
+    <h2>Bookings</h2>
+    <div class="scroll"><table class="stack"><thead><tr><th>What</th><th>Details</th><th>Dates</th><th class="n">Cost</th></tr></thead><tbody id="booktable"></tbody></table></div>
+  </section>
+
+  <section class="sec" id="tickets">
+    <h2>Attraction tickets: about $1,131 for all four</h2>
+    <div class="two">
+      <div>
+        <div class="bars" id="bars"></div>
+        <p style="color:var(--soft);font-size:14px;margin-top:14px">CityPASS saves at least $218 compared with buying those 5 tickets separately (about $802+). Separate-ticket prices are the lowest "from" prices on each official site; holiday time slots may cost more.</p>
+      </div>
+      <div class="scroll"><table><thead><tr><th>Ticket</th><th class="n">Each</th><th class="n">× 4</th></tr></thead><tbody id="tixtable"></tbody></table></div>
+    </div>
+  </section>
+
+  <section class="sec" id="todo">
+    <h2>To book and check</h2>
+    <div class="two">
+      <div><h3 style="font-size:24px;margin-bottom:6px">Still to book</h3><ul class="check" id="checklist"></ul></div>
+      <div><h3 style="font-size:24px;margin-bottom:6px">Calls and checks</h3><ul class="check" id="calls"></ul></div>
+    </div>
+  </section>
+
+  <section class="sec" id="tips">
+    <h2>Good to know</h2>
+    <div class="two">
+      <ul class="plain" id="tiplist"></ul>
+      <div class="fact">
+        <small>Getting around New York</small>
+        <strong>The 7 train, 24 hours a day</strong>
+        <p style="margin:6px 0 0">The hotel is by Flushing–Main St, the first stop on the 7. It goes straight to Grand Central, 5 Av/Bryant Park, Times Square and 34 St–Hudson Yards in about 35–40 minutes. Check the MTA app each day for service changes.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap band">
+  <p style="margin:0 0 8px"><strong style="color:#fff">Useful links:</strong>
+  <a href="https://www.citypass.com/new-york">CityPASS</a> ·
+  <a href="https://www.mta.info/schedules/subway/7-train">7 train (MTA)</a> ·
+  <a href="https://511ny.org">511NY road conditions</a> ·
+  <a href="https://bronxzoo.com/holiday-lights">Bronx Zoo Holiday Lights</a> ·
+  <a href="https://www.niagarafallsstatepark.com/tours-events/fireworks/">Niagara fireworks</a> ·
+  <a href="https://www.avis.com/en/locations/nam/us/ny/flushing/lga">Avis LaGuardia</a></p>
+  <p style="margin:0">Last updated Nov 25, 2026. Holiday hours change, so recheck each place a few days before.</p>
+</div></footer>
+
+<script>
+{
+const facts=[
+ ["Fly in","Wed Dec 23, 11:15 PM","LaGuardia (LGA)"],
+ ["New York hotel","Renaissance Flushing","Dec 23–28 · 5 nights"],
+ ["Niagara hotel","Fairfield Inn & Suites","Dec 28–29 · 1 night"],
+ ["Rental car","Avis LaGuardia","Dec 28, 4 AM → Dec 29, 3 PM"],
+ ["Fly home","Tue Dec 29, 5:30 PM","LaGuardia (LGA)"]
+];
+const days=[
+ {id:"dec23",d:"23",w:"Wed",title:"Arrival",sub:"Land late, straight to the hotel.",stops:[
+  ["11:15 PM","Land at LaGuardia","","go"],
+  ["~11:45 PM","Hotel shuttle or taxi to the Renaissance, Flushing","The Renaissance shuttle runs from LaGuardia only. Call ahead to confirm it runs around midnight and where it picks up. Otherwise take a taxi from the official line (10–15 minutes). Tell the hotel you'll check in after midnight.","drive"]]},
+ {id:"dec24",d:"24",w:"Thu",title:"Christmas Eve: Statue of Liberty, 9/11, Rockefeller Center",sub:"Early start, downtown first, Midtown lights at night.",stops:[
+  ["7:30 AM","Leave the hotel","7 train to Grand Central, then the 4/5 to Bowling Green. Arrive 30–45 minutes early for ferry security.","drive"],
+  ["~9:00 AM","Statue of Liberty + Ellis Island","Earliest ferry from Battery Park, reserved in the CityPASS app. About 4 hours. The islands may close up to 2 hours early today.","pass"],
+  ["~2:00 PM","9/11 Memorial & Museum","15-minute walk from the ferry. Lunch on the way (Stone Street or the Oculus). Check Christmas Eve hours first: if it closes early, see the free outdoor pools today and move the museum to Dec 26 morning.","pass"],
+  ["Evening","Top of the Rock","Evening slot for the city lights.","pass"],
+  ["After","Rockefeller tree, Saks light show, 5th Ave windows","The tree and rink, the Saks Fifth Avenue light show across the street, and the holiday windows. Stores close early today.","free"]]},
+ {id:"dec25",d:"25",w:"Fri",title:"Christmas Day: Central Park, Madame Tussauds, Empire State",sub:"Many places are closed, so the day stays in Midtown. Subways run a holiday schedule.",stops:[
+  ["Morning","Central Park","Enter at 59th St & 5th Ave: Wollman Rink, The Mall, Bethesda Terrace, Bow Bridge. About 2 hours.","free"],
+  ["Afternoon","Madame Tussauds + Times Square","60–90 minutes inside. Buy timed tickets online ahead ($10 cheaper than at the door) and confirm Christmas Day hours.","tix"],
+  ["Night","Empire State Building","Open every day; after 9 PM is usually less crowded. About 1.5 hours.","pass"]],
+  note:"Many restaurants close on Christmas: reserve a meal ahead, or eat in Flushing, where most places stay open."},
+ {id:"dec26",d:"26",w:"Sat",title:"Brooklyn Bridge, DUMBO, Bronx Zoo Holiday Lights",sub:"Walk into Brooklyn, then up to the Bronx for the lanterns.",stops:[
+  ["Morning","Walk the Brooklyn Bridge + DUMBO","7 train to Grand Central, 4/5/6 to Brooklyn Bridge–City Hall, then walk across (30–40 minutes). In DUMBO: the Manhattan Bridge photo on Washington St, Jane's Carousel, Brooklyn Bridge Park. Lunch there.","free"],
+  ["~2:30 PM","Bronx Zoo Holiday Lights","The 2 train from Clark St goes straight to the Bronx (about 1 hour 15 minutes). Entry from 1 PM. Dress very warmly. About 4 hours.","tix"],
+  ["4:30 PM","Lanterns switch on","Last entry is 8 PM.","tix"]]},
+ {id:"dec27",d:"27",w:"Sun",title:"Intrepid, Vessel, High Line, SUMMIT, Harbor Lights cruise",sub:"A full west-side day, then an early night before the 4 AM drive.",stops:[
+  ["10:00 AM","Intrepid Museum","Pier 86, W 46th St & 12th Ave. Flight deck, Space Shuttle Enterprise, the Concorde, the Growler submarine. 7 train to 34 St–Hudson Yards, then a 15-minute walk. Until about 12:15.","tix"],
+  ["12:30 PM","Vessel at Hudson Yards","About $14, timed entry, about 30 minutes. 15-minute walk from the Intrepid. Parts may be netted or closed.","tix"],
+  ["1:00 PM","Walk the High Line","Enter right by the Vessel and walk south above the streets. Check thehighline.org that morning: it can close in storms or high winds. Short on time? Exit at 23rd St.","free"],
+  ["1:45 PM","Lunch at Chelsea Market","Indoor food hall at 15th–16th St and 9th Ave, just below the High Line's south end.","free"],
+  ["2:45 PM","Bryant Park Winter Village + Grand Central","A/C/E from 14 St to 42 St, walk east. Market stalls and the rink, the Library lions, then Grand Central's Main Concourse. Keep it short if you're behind.","free"],
+  ["4:00 PM","SUMMIT One Vanderbilt","Right next to Grand Central. Catches sunset (about 4:35 PM) without the 5:30–8 PM sunset surcharge. About 1.5 hours.","tix"],
+  ["7:00 PM","Circle Line Holiday Harbor Lights cruise","Pier 83, W 42nd St & 12th Ave. Taxi or the M42 bus from Grand Central (about 20 minutes); arrive by 6:30 PM. 2 hours, with holiday decorations on board.","pass"],
+  ["~9:30 PM","Back to Flushing, pack, bed by 10:30","If everyone is exhausted, skip the cruise: sleep before the drive matters more.","drive"]]},
+ {id:"dec28",d:"28",w:"Mon",title:"Drive to Niagara Falls + the falls",sub:"About 6.5 hours of driving (7–7.5 with a stop). US side only: don't cross into Canada.",stops:[
+  ["3:30 AM","Check out, taxi to Avis","Avis lot at LaGuardia, 25 Bowery Bay Blvd (10–15 minutes). The hotel shuttle only runs from the airport, not to it.","drive"],
+  ["4:00 AM","Pick up the car and go","Check 511ny.org the night before; if lake-effect snow is forecast, leave earlier. Swap drivers every 2 hours. Breakfast stop around 7:30 AM.","drive"],
+  ["~11:30 AM","Arrive at the Fairfield Inn, 643 Rainbow Blvd","Ask to park for the day ($10) and leave bags; check-in is 3 PM. The falls are a walk away.","drive"],
+  ["Noon","Niagara Falls State Park","Prospect Point for the classic view. Goat Island: Luna Island, Terrapin Point at the edge of Horseshoe Falls, the Three Sisters Islands. Expect ice and mist. Lunch near Old Falls Street. Maid of the Mist and Cave of the Winds are closed in winter.","free"],
+  ["3:30 PM","Aquarium of Niagara (optional)","Indoors, about 1 hour. Check closing time first.","tix"],
+  ["5:00 PM","Hotel check-in","Rest and change. Ask about grab-and-go breakfast for a 5 AM departure.","go"],
+  ["8:00 PM","Falls lighting + fireworks","Falls lit in color every night; fireworks nightly over the holidays, weather permitting. Best free spot: Prospect Point. Then dinner, fill the tank, bed by 9:30.","free"]]},
+ {id:"dec29",d:"29",w:"Tue",title:"Drive back + fly home",sub:"Car back by 3 PM at the latest.",stops:[
+  ["4:30 AM","Leave Niagara Falls","Check 511ny.org for snow. Breakfast stop around 7:30 AM. Swap drivers every 2 hours.","drive"],
+  ["~12:30 PM","Return the car at Avis LaGuardia","Fill the tank near the airport first. Aim for 12:30–1:30 PM; the booking ends at 3:00 PM. Then the Avis shuttle to the terminal.","drive"],
+  ["5:30 PM","Flight home","LaGuardia → Detroit → Houston.","go"]],
+  note:"Check the Detroit → Houston connection: flight #1957 leaves Detroit at 2:55 PM but we land in Detroit at 7:33 PM, so it's probably Dec 30 (a night in Detroit) or a booking error. Confirm with the airline."}
+];
+const bookings=[
+ ["Flights","Houston → Orlando → LaGuardia; LaGuardia → Detroit → Houston","Dec 23 / Dec 29","Booked"],
+ ["New York hotel","Renaissance New York Flushing Hotel at Tangram, 133-36 37th Ave, Flushing, NY 11354. 2 double beds. Non-refundable.","Dec 23 → Dec 28","~$1,390"],
+ ["Niagara hotel","Fairfield by Marriott Inn & Suites Niagara Falls, 643 Rainbow Blvd, Niagara Falls, NY 14303. 2 queen beds. Free breakfast 6:30–9 AM.","Dec 28 → Dec 29","$110.82 + $10 parking"],
+ ["Rental car","Avis LaGuardia, 25 Bowery Bay Blvd. Intermediate SUV (Mazda CX-50 or similar), unlimited miles, extra driver, roadside assistance.","Dec 28 4 AM → Dec 29 3 PM","$286.61"],
+ ["CityPASS × 4","Statue of Liberty, 9/11 Museum, Top of the Rock, Empire State Building, Harbor Lights cruise. 3 adult + 1 child (6–17).","9 days from first use","$584"]
+];
+const tix=[
+ ["CityPASS (5 attractions)",null,584,"pass"],
+ ["Summit One Vanderbilt","$49.99+",203,"tix"],
+ ["Intrepid Museum","$38",152,"tix"],
+ ["Madame Tussauds (online)","$34",136,"tix"],
+ ["Vessel","~$14",56,"tix"]
+];
+const todo=[
+ ["Flights",1],["Renaissance Flushing (Dec 23–28)",1],["Avis rental car",1],["Fairfield Inn Niagara (Dec 28–29)",1],
+ ["CityPASS × 4, then reserve times in the app",1],
+ ["Madame Tussauds (Dec 25 afternoon)",0],["Bronx Zoo Holiday Lights (Dec 26)",0],["Intrepid (Dec 27, 10 AM)",0],
+ ["Vessel (Dec 27, 12:30 PM)",0],["SUMMIT One Vanderbilt (Dec 27, 4:00 PM)",0],["Christmas Day meal reservation",0]
+];
+const calls=[
+ "Renaissance: does the LaGuardia shuttle run around midnight on Dec 23? Where does it pick up?",
+ "Fairfield: can we park and leave bags from ~11:30 AM on Dec 28? Express checkout at 4:30 AM?",
+ "Avis: does our own car insurance or credit card cover rentals? Tolls are billed to the card afterward.",
+ "Airline: confirm the Detroit → Houston date.",
+ "CityPASS app: reserve Statue (Dec 24 first ferry), 9/11 (Dec 24 ~2 PM), Top of the Rock (Dec 24 evening), Empire State (Dec 25 night), Harbor Lights (Dec 27, 7 PM)."
+];
+const tips=[
+ "<strong>Cold:</strong> near or below freezing in New York, colder at Niagara. Hats, gloves, warm layers, waterproof boots.",
+ "<strong>Crowds:</strong> the busiest week of the year. Book timed tickets and arrive early.",
+ "<strong>Holiday hours change:</strong> recheck each place's website a few days before.",
+ "<strong>Age:</strong> our 15-year-old may be asked to show age at some places. A school ID or passport photo works.",
+ "<strong>Food:</strong> Flushing has plenty of cheap breakfast spots near the hotel.",
+ "<strong>No Canada:</strong> stay on the US side at Niagara; don't cross the Rainbow Bridge."
+];
+const tagName={pass:"CityPASS",tix:"Ticket",free:"Free",drive:"Travel",go:""};
+
+document.getElementById("facts").innerHTML=facts.map(f=>`<div class="fact"><small>${f[0]}</small><strong>${f[1]}</strong><em>${f[2]}</em></div>`).join("");
+document.getElementById("nav").innerHTML=days.map(d=>`<a href="#${d.id}">Dec ${d.d} <span>${d.w}</span></a>`).join("")+`<a href="#bookings">Bookings</a><a href="#tickets">Tickets</a><a href="#todo">To do</a>`;
+document.getElementById("days").innerHTML=days.map(d=>`<section class="day" id="${d.id}">
+ <div class="dayhead"><div class="date"><small>${d.w} Dec</small>${d.d}</div><div><h2>${d.title}</h2><p>${d.sub}</p></div></div>
+ <ol class="stops">${d.stops.map(s=>`<li class="stop c-${s[3]}"><div class="t">${s[0]}</div><div class="dot"></div><div><h3>${s[1]}${tagName[s[3]]?`<span class="tag">${tagName[s[3]]}</span>`:""}</h3>${s[2]?`<p>${s[2]}</p>`:""}</div></li>`).join("")}</ol>
+ ${d.note?`<div class="note">${d.note}</div>`:""}</section>`).join("");
+document.getElementById("booktable").innerHTML=bookings.map(b=>`<tr><td data-l="What"><strong>${b[0]}</strong></td><td data-l="Details">${b[1]}</td><td data-l="Dates">${b[2]}</td><td class="n" data-l="Cost">${b[3]}</td></tr>`).join("");
+const max=Math.max(...tix.map(t=>t[2])),sum=tix.reduce((a,t)=>a+t[2],0);
+document.getElementById("bars").innerHTML=tix.map(t=>`<div class="bar c-${t[3]}"><span>${t[0]}</span><div class="track"><div class="fill" style="width:${(t[2]/max*100).toFixed(1)}%"></div></div><b>$${t[2].toLocaleString()}</b></div>`).join("");
+document.getElementById("tixtable").innerHTML=
+ `<tr><td>CityPASS: 3 adult × $149, 1 child × $129, + $8 fee</td><td class="n">—</td><td class="n">$584</td></tr>`+
+ tix.slice(1).map(t=>`<tr><td>${t[0]}</td><td class="n">${t[1]}</td><td class="n">$${t[2]}</td></tr>`).join("")+
+ `<tr><td>Bronx Zoo Holiday Lights</td><td class="n">by date</td><td class="n">—</td></tr>`+
+ `<tr class="total"><td>Total (before Bronx Zoo)</td><td></td><td class="n">$${sum.toLocaleString()}</td></tr>`;
+document.getElementById("checklist").innerHTML=todo.map(t=>`<li class="${t[1]?"done":""}">${t[0]}</li>`).join("");
+document.getElementById("calls").innerHTML=calls.map(c=>`<li>${c}</li>`).join("");
+document.getElementById("tiplist").innerHTML=tips.map(t=>`<li>${t}</li>`).join("");
+
+const cnt=document.getElementById("count");
+const start=new Date(2026,11,23),end=new Date(2026,11,30),now=new Date();
+const dleft=Math.ceil((start-now)/864e5);
+cnt.innerHTML=now<start?`<b>${dleft}</b> days to go`:now<end?`<b>We're on the trip!</b>`:`<b>Trip done</b> hope it was great`;
+
+const s=document.getElementById("scene");
+let seed=7;const rnd=()=>(seed=seed*16807%2147483647)/2147483647;
+let g=`<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d1030"/><stop offset=".7" stop-color="#2a2460"/><stop offset="1" stop-color="#4b2f6e"/></linearGradient>
+<linearGradient id="water" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe6ff"/><stop offset="1" stop-color="#5aa7e0"/></linearGradient>
+<radialGradient id="glow"><stop offset="0" stop-color="#ffd2e8" stop-opacity=".55"/><stop offset="1" stop-color="#ffd2e8" stop-opacity="0"/></radialGradient></defs>
+<rect width="1200" height="520" fill="url(#sky)"/>`;
+for(let i=0;i<60;i++)g+=`<circle cx="${(rnd()*1200).toFixed(0)}" cy="${(rnd()*260).toFixed(0)}" r="${(rnd()*1.3+.3).toFixed(1)}" fill="#fff" opacity="${(rnd()*.6+.2).toFixed(2)}"/>`;
+g+=`<circle cx="1080" cy="80" r="26" fill="#f4f1ff" opacity=".9"/>`;
+// far skyline
+let x=0;while(x<760){const w=24+rnd()*36,h=70+rnd()*110;g+=`<rect x="${x.toFixed(0)}" y="${(520-h-60).toFixed(0)}" width="${w.toFixed(0)}" height="${(h+60).toFixed(0)}" fill="#33306b"/>`;x+=w+2}
+// landmark towers
+const bld=(x,w,h,col)=>{let r=`<rect x="${x}" y="${520-h}" width="${w}" height="${h}" fill="${col}"/><rect x="${x+w-8}" y="${520-h}" width="8" height="${h}" fill="#000" opacity=".18"/>`;for(let yy=520-h+12;yy<500;yy+=16)for(let xx=x+6;xx<x+w-10;xx+=11)if(rnd()>.45)r+=`<rect x="${xx}" y="${yy}" width="5" height="7" fill="#fff4d8" opacity="${(rnd()*.5+.35).toFixed(2)}"/>`;return r};
+g+=bld(40,70,230,"#1c1b45")+bld(118,58,190,"#211f4f");
+// Empire State style
+g+=bld(190,90,260,"#1a1942")+`<rect x="210" y="235" width="50" height="30" fill="#1a1942"/><rect x="222" y="205" width="26" height="32" fill="#1a1942"/><rect x="231" y="150" width="8" height="58" fill="#1a1942"/><rect x="226" y="222" width="18" height="6" fill="#ff5a6e"/><rect x="226" y="212" width="18" height="6" fill="#7fd29b"/><circle cx="235" cy="150" r="3" fill="#ff5a6e"/>`;
+// Chrysler style crown
+g+=bld(300,64,250,"#22204f")+`<path d="M300 270 Q332 210 364 270Z" fill="#c9c9e6"/><path d="M312 270 Q332 228 352 270Z" fill="#22204f"/><path d="M322 270 Q332 246 342 270Z" fill="#c9c9e6"/><rect x="330" y="186" width="4" height="40" fill="#c9c9e6"/>`;
+g+=bld(380,80,200,"#1d1c47")+bld(470,56,160,"#24225a");
+// Christmas tree
+g+=`<circle cx="590" cy="420" r="90" fill="url(#glow)"/><rect x="584" y="470" width="12" height="40" fill="#5a3a22"/>`;
+[[590,350,40,70],[590,385,55,80],[590,420,70,85]].forEach(t=>{g+=`<path d="M${t[0]} ${t[1]} L${t[0]-t[2]} ${t[1]+t[3]} L${t[0]+t[2]} ${t[1]+t[3]}Z" fill="#1f7a4f"/><path d="M${t[0]} ${t[1]} L${t[0]+t[2]} ${t[1]+t[3]} L${t[0]} ${t[1]+t[3]}Z" fill="#165c3b"/>`});
+g+=`<path d="M590 334 l5 11 12 1 -9 8 3 12 -11 -6 -11 6 3 -12 -9 -8 12 -1z" fill="#ffd66b"/>`;
+for(let i=0;i<26;i++){const yy=370+rnd()*130,sp=(yy-350)*.75;g+=`<circle cx="${(590+(rnd()*2-1)*sp*.9).toFixed(0)}" cy="${yy.toFixed(0)}" r="3.2" fill="${["#ff5a6e","#ffd66b","#9fd8ff","#ffffff"][i%4]}"/>`}
+// road to niagara
+g+=`<path d="M660 520 C760 470 840 470 900 430" stroke="#0b0c22" stroke-width="34" fill="none"/><path d="M660 520 C760 470 840 470 900 430" stroke="#ffffff" stroke-width="3" stroke-dasharray="14 12" fill="none" opacity=".7"/>`;
+// falls cliff
+g+=`<path d="M880 330 L1200 300 L1200 520 L860 520Z" fill="#1b2a3f"/><path d="M930 345 L1200 318 L1200 520 L930 520Z" fill="url(#water)" opacity=".9"/>`;
+for(let i=0;i<22;i++){const xx=940+i*12;g+=`<rect x="${xx}" y="${342-i*1.2}" width="3" height="${170+rnd()*20}" fill="#fff" opacity="${(rnd()*.4+.25).toFixed(2)}"/>`}
+g+=`<path d="M900 340 L940 334 L940 520 L900 520Z" fill="#23344d"/><ellipse cx="1070" cy="505" rx="170" ry="40" fill="#e9f6ff" opacity=".55"/><ellipse cx="1000" cy="515" rx="120" ry="26" fill="#fff" opacity=".45"/>`;
+// fireworks
+[[1010,170,"#ff8fb0"],[1130,210,"#9fd8ff"]].forEach(f=>{for(let a=0;a<12;a++){const an=a/12*Math.PI*2;g+=`<line x1="${f[0]+Math.cos(an)*8}" y1="${f[1]+Math.sin(an)*8}" x2="${(f[0]+Math.cos(an)*30).toFixed(1)}" y2="${(f[1]+Math.sin(an)*30).toFixed(1)}" stroke="${f[2]}" stroke-width="2.5" stroke-linecap="round"/>`}});
+// snow ground
+g+=`<path d="M0 505 Q300 492 660 510 L660 520 L0 520Z" fill="#e9ecff" opacity=".9"/>`;
+for(let i=0;i<70;i++){const dur=(8+rnd()*10).toFixed(1),del=(-rnd()*18).toFixed(1);g+=`<circle class="flake" style="animation-duration:${dur}s;animation-delay:${del}s" cx="${(rnd()*1200).toFixed(0)}" cy="${(rnd()*40-20).toFixed(0)}" r="${(rnd()*2.2+1).toFixed(1)}" fill="#fff" opacity="${(rnd()*.5+.4).toFixed(2)}"/>`}
+s.innerHTML=g;
+}
+</script>
+</body>
+</html>
